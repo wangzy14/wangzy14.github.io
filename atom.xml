@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
-    <id>https://github.com/wangzy14/blog.github.io</id>
+    <id>https://wangzy14.github.io</id>
     <title>Gridea</title>
-    <updated>2020-07-14T09:30:50.613Z</updated>
+    <updated>2020-07-14T09:40:53.290Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
-    <link rel="alternate" href="https://github.com/wangzy14/blog.github.io"/>
-    <link rel="self" href="https://github.com/wangzy14/blog.github.io/atom.xml"/>
+    <link rel="alternate" href="https://wangzy14.github.io"/>
+    <link rel="self" href="https://wangzy14.github.io/atom.xml"/>
     <subtitle>温故而知新</subtitle>
-    <logo>https://github.com/wangzy14/blog.github.io/images/avatar.png</logo>
-    <icon>https://github.com/wangzy14/blog.github.io/favicon.ico</icon>
+    <logo>https://wangzy14.github.io/images/avatar.png</logo>
+    <icon>https://wangzy14.github.io/favicon.ico</icon>
     <rights>All rights reserved 2020, Gridea</rights>
     <entry>
         <title type="html"><![CDATA[Hello Gridea]]></title>
-        <id>https://github.com/wangzy14/blog.github.io/post/hello-gridea/</id>
-        <link href="https://github.com/wangzy14/blog.github.io/post/hello-gridea/">
+        <id>https://wangzy14.github.io/post/hello-gridea/</id>
+        <link href="https://wangzy14.github.io/post/hello-gridea/">
         </link>
         <updated>2018-12-11T16:00:00.000Z</updated>
         <summary type="html"><![CDATA[<p>👏  欢迎使用 <strong>Gridea</strong> ！<br>
