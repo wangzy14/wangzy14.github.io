@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 
 <head>
     <meta charset="utf-8" />
@@ -49,38 +49,10 @@
                                 })();
                             </script>
                             
-        <script src="//cdn.jsdelivr.net/gh/tangkaichuan/gridea-search/lib/fuse.js"></script>
-        <script src="//cdn.jsdelivr.net/gh/tangkaichuan/gridea-search/lib/ejs.min.js"></script>
-        <script src="//cdn.jsdelivr.net/gh/tangkaichuan/gridea-search/lib/gridea-search.min.js"></script>
-        <script src="//cdn.jsdelivr.net/gh/tangkaichuan/gridea-search/example/assets/media/gridea-search/result-template.ejs" type="text/ejs"></script>
-        <style>
-            .main_ {
-                display: flex;
-                flex-direction: column;
-                width: 100%;
-                height: 90vh;
-            }
-            
-            .result-box {
-                margin-top: 50px;
-                display: flex;
-                border-radius: 5px;
-                -webkit-box-sizing: border-box;
-                -moz-box-sizing: border-box;
-                box-sizing: border-box;
-                margin-left: auto;
-                margin-right: auto;
-            }
-        </style>
 </head>
 
 <body>
-    <style>
-        .searched-keyword {
-            background-color: green;
-        }
-    </style>
-    <div class="main_">
+    <div class="wrapper">
         <header>
     <nav class="navbar">
         <div class="container">
@@ -187,15 +159,121 @@
 
     }
 </script>
-            <div class="result-box">
-                <div id="gridea-search-result">
-                    <p class="searching">搜索中......</p>
-                    <p class="no-result" style="display:none">未搜索到相关文章</p>
+            <div class="main">
+                <div class="container">
+                    <article class="post-wrap">
+                        <header class="post-header">
+                            <h1 class="post-title">
+                                安卓中的布局组件
+                            </h1>
+                            
+                                <!--en-->
+                                <div class="post-meta en">
+                                    Author:
+                                    <a itemprop="author" rel="author" href="/">
+                                        BurgundyRed
+                                    </a>
+                                    <span class="post-time">
+                                Date: <a href="#">2020-07-15</a>
+                            </span>
+                                    <span class="post-readtime">Reading Time:<a
+                                    href="#">1.4
+                                    mins</a></span>
+                                    <span class="post-words">words:<a href="#">316</a></span>
+                                    
+                                            Views:
+                                            <span data-hk-page="current"> - </span>
+                                            
+                                </div>
+                                
+                        </header>
+                        
+                        <div class="post-content">
+                            <h1 id="布局">布局</h1>
+<p>布局组件是安卓中最常用的界面显示组件。布局中的所有元素均使用 View 和 ViewGroup 对象的层次结构进行构建。布局结构如图所示。<br>
+<img src="https://wangzy14.github.io/post-images/1594817541632.png" alt="view" width="400" height="400" loading="lazy"></p>
+<blockquote>
+<p>View 对象通常称为“微件”，可以是众多子类之一，例如 Button 或 TextView。ViewGroup 对象通<br>
+常称为“布局”，可以是提供其他布局结构的众多类型之一，例如 LinearLayout 或<br>
+ConstraintLayout。</p>
+</blockquote>
+<p>其实也就是说“微件”是可以镶嵌在“布局”之中的，而布局可以定义各个“微件”之间的位置关系。</p>
+<p>而想要使用布局组件的话，需要在xml文件中进行声明：</p>
+<pre><code class="language-xml">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+&lt;LinearLayout xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;
+              android:layout_width=&quot;match_parent&quot;
+              android:layout_height=&quot;match_parent&quot;
+              android:orientation=&quot;vertical&quot; &gt;
+    &lt;TextView android:id=&quot;@+id/text&quot;
+              android:layout_width=&quot;wrap_content&quot;
+              android:layout_height=&quot;wrap_content&quot;
+              android:text=&quot;Hello, I am a TextView&quot; /&gt;
+    &lt;Button android:id=&quot;@+id/button&quot;
+            android:layout_width=&quot;wrap_content&quot;
+            android:layout_height=&quot;wrap_content&quot;
+            android:text=&quot;Hello, I am a Button&quot; /&gt;
+&lt;/LinearLayout&gt;
+</code></pre>
+<p>声明之后，要在java代码中通过调用 setContentView()，并以 R.layout.layout_file_name 形式向应用代码传递布局资源的引用：</p>
+<pre><code class="language-java">public void onCreate(Bundle savedInstanceState) {
+    super.onCreate(savedInstanceState);
+    setContentView(R.layout.main_layout);
+}
+</code></pre>
+
+                        </div>
+                        
+                            <div class="post-toc">
+                                <ul class="markdownIt-TOC">
+<li><a href="#%E5%B8%83%E5%B1%80">布局</a></li>
+</ul>
+
+                            </div>
+                            
+                                
+                                                    
+                                                        <!-- Share-->
+                                                        <span style="margin-right:15px">
+                                                    <i class="post-share"></i>
+                                                    <span>Share:</span>
+                                                        <a title="QR Code" target="_blank" href="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://wangzy14.github.io/post/an-zhuo-zhong-de-bu-ju-zu-jian/"><i class="fa fa-qrcode"></i></a>
+                                                        <a title="QQ" target="_blank" href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=https://wangzy14.github.io/post/an-zhuo-zhong-de-bu-ju-zu-jian/&sharesource=qzone&title=安卓中的布局组件&pics=https://wangzy14.github.io/images/avatar.png?v=1594820992532&summary="><i class="fa fa-qq"></i></a>
+                                                        <a title="Weibo" target="_blank" href="https://service.weibo.com/share/share.php?url=https://wangzy14.github.io/post/an-zhuo-zhong-de-bu-ju-zu-jian/&sharesource=weibo&title=安卓中的布局组件 + " - " + &pic="https://wangzy14.github.io/images/avatar.png?v=1594820992532 "><i class="fa fa-weibo "></i></a>
+                                                        
+                                                                </span>
+                                                                <!--en-->
+                                                                <section class="post-tags en ">
+                                                                    <div>
+                                                                        <span>Tag(s):</span>
+                                                                        <span class="tag ">
+                        
+                                                            </span>
+                                                                    </div>
+                                                                    <div>
+                                                                        <a href="javascript:window.history.back();">back</a>
+                                                                        <span>&dot;</span>
+                                                                        <a href="#">home</a>
+                                                                    </div>
+                                                                </section>
+                                                                
+                                                                                <!---->
+                                                                                <section class="post-nav">
+                                                                                    
+                                                                                            
+                                                                                                <a class="next" rel="next" href="https://wangzy14.github.io/post/androidstudio-kuai-jie-jian/">
+                                                                                                    AndroidStudio 快捷键
+                                                                                                </a>
+                                                                                                
+                                                                                </section>
+                    </article>
                 </div>
+                
+                                            
             </div>
     </div>
-</body>
-
+    </div>
+    </div>
+    
         <footer id="footer" class="footer">
             <div class="copyright">
                 
@@ -296,3 +374,10 @@
                         tpwidget("show");
                     </script>
                     
+        </div>
+</body>
+<script>
+    scroll();
+</script>
+
+</html>
