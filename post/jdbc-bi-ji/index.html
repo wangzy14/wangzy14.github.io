@@ -83,7 +83,7 @@
                         <input id="switch_default" type="checkbox" class="switch_default">
                         <label for="switch_default" class="toggleBtn"></label>
             </div>
-            <form id="gridea-search-form" data-update="1597037845096" action="/search/index.html">
+            <form id="gridea-search-form" data-update="1597048338238" action="/search/index.html">
                 <input class="search-input" autocomplete="off" spellcheck="false" name="q" autofocus="true" placeholder="Search...">
             </form>
         </div>
@@ -102,7 +102,7 @@
                         <!--zh-->
                         <a id="mobile-toggle-theme-zh" class="a zh">&nbsp;&#x6697;&#x9ED1;</a>
                     </div>
-                    <form id="gridea-search-form" data-update="1597037845096" action="/search/index.html">
+                    <form id="gridea-search-form" data-update="1597048338238" action="/search/index.html">
                         <input class="search-input" autocomplete="off" spellcheck="false" name="q" autofocus="true" placeholder="Search...">
                     </form>
                     <!--en-->
@@ -177,9 +177,9 @@
                                 Date: <a href="#">2020-08-10</a>
                             </span>
                                     <span class="post-readtime">Reading Time:<a
-                                    href="#">1.3
+                                    href="#">4.8
                                     mins</a></span>
-                                    <span class="post-words">words:<a href="#">310</a></span>
+                                    <span class="post-words">words:<a href="#">1128</a></span>
                                     
                                             Views:
                                             <span data-hk-page="current"> - </span>
@@ -234,7 +234,10 @@ connection.close();
 <h1 id="jdbc核心api详解">JDBC核心API详解</h1>
 <figure data-type="image" tabindex="1"><img src="https://PoorDogsHome.github.io/post-images/1597035151257.png" alt="" loading="lazy"></figure>
 <h2 id="drivermanager类">DriverManager类</h2>
-<p>通过查看源码，我们发现源代码通过静态代码块来注册的数据库驱动，因此我们只需要适合用<code>Class.forname()</code>将Driver类加载进内存，它就可以自动注册了。</p>
+<ol>
+<li>注册驱动<br>
+通过查看源码，我们发现源代码通过静态代码块来注册的数据库驱动，因此我们只需要适合用<code>Class.forname()</code>将Driver类加载进内存，它就可以自动注册了。（注意：MySQL5以后不需要注册也可以自动加载）</li>
+</ol>
 <pre><code>public class Driver implements java.sql.Driver {     
     public Driver() throws SQLException {     } 
      static {         
@@ -246,6 +249,160 @@ connection.close();
     } 
 } 
 </code></pre>
+<ol start="2">
+<li>获取数据库连接</li>
+</ol>
+<ul>
+<li>方法：static Connection getConnection(String url, String user, String password);</li>
+</ul>
+<h2 id="connection类">Connection类</h2>
+<ol>
+<li>获取sql的对象
+<ul>
+<li>Statement createStatement()</li>
+<li>PreparedStatement prepareStatement(String sql)</li>
+</ul>
+</li>
+<li>管理事务
+<ul>
+<li>开启事务：setAutoCommit(boolean autoCommit) ：调用该方法设置参数为false，即开启事务</li>
+<li>提交事务：commit()</li>
+<li>回滚事务：rollback()</li>
+</ul>
+</li>
+</ol>
+<h2 id="statement类">Statement类</h2>
+<ol>
+<li>boolean execute(String sql) ：可以执行任意的sql （不常用）</li>
+<li>int executeUpdate(String sql) ：执行DML（insert、update、delete）语句、DDL(create，alter、drop)语句
+<ul>
+<li>返回值：返回该语句执行影响的行数，可以通过这个影响的行数判断DML语句是否执行成功 返回值&gt;0的则执行成功，反之，则失败。</li>
+</ul>
+</li>
+<li>ResultSet executeQuery(String sql)  ：执行DQL（select)语句。</li>
+</ol>
+<p>代码：</p>
+<pre><code>        Statement stmt = null;
+        Connection conn = null;
+        try {
+            //1. 注册驱动
+            Class.forName(&quot;com.mysql.jdbc.Driver&quot;);
+            //2. 定义sql
+            String sql = &quot;insert into account values(null,'王五',3000)&quot;;
+            //3.获取Connection对象
+            conn = DriverManager.getConnection(&quot;jdbc:mysql:///db3&quot;, &quot;root&quot;, &quot;root&quot;);
+            //4.获取执行sql的对象 Statement
+            stmt = conn.createStatement();
+            //5.执行sql
+            int count = stmt.executeUpdate(sql);//影响的行数
+            //6.处理结果
+            System.out.println(count);
+            if(count &gt; 0){
+                System.out.println(&quot;添加成功！&quot;);
+            }else{
+                System.out.println(&quot;添加失败！&quot;);
+            }
+
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }finally {
+            //stmt.close();
+            //7. 释放资源
+            //避免空指针异常
+            if(stmt != null){
+                try {
+                    stmt.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+
+            if(conn != null){
+                try {
+                    conn.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+</code></pre>
+<h2 id="resultset类">ResultSet类</h2>
+<p>封装查询结果。</p>
+<ul>
+<li>boolean next(): 游标向下移动一行，判断当前行是否是最后一行末尾。</li>
+<li>getXxx(参数):获取数据
+<ul>
+<li>Xxx：代表数据类型   如： int getInt() ,	String getString()</li>
+<li>参数：<br>
+1. int：代表列的编号,从1开始   如： getString(1)<br>
+2. String：代表列名称。 如： getDouble(&quot;balance&quot;)</li>
+<li>使用步骤：</li>
+</ul>
+</li>
+</ul>
+<pre><code>                1. 游标向下移动一行
+                2. 判断是否有数据
+                3. 获取数据
+</code></pre>
+<h2 id="preparedstatement">PreparedStatement</h2>
+<p>执行sql的对象。</p>
+<ul>
+<li>SQL注入问题：在拼接sql时，有一些sql的特殊关键字参与字符串的拼接。会造成安全性问题
+<ul>
+<li>输入用户随便，输入密码：a' or 'a' = 'a</li>
+<li>sql：select * from user where username = 'fhdsjkf' and password = 'a' or 'a' = 'a'</li>
+</ul>
+</li>
+<li>解决sql注入问题：使用PreparedStatement对象来解决</li>
+<li>预编译的SQL：参数使用?作为占位符</li>
+<li>步骤：</li>
+</ul>
+<pre><code>    1. 导入驱动jar包 
+    2. 注册驱动
+    3. 获取数据库连接对象 Connection
+    4. 定义sql
+        * 注意：sql的参数使用？作为占位符。 如：select * from user where username = ? and password = ?;
+    5. 获取执行sql语句的对象 PreparedStatement  Connection.prepareStatement(String sql) 
+    6. 给？赋值：
+        * 方法： setXxx(参数1,参数2)
+            * 参数1：？的位置编号 从1 开始
+            * 参数2：？的值
+    7. 执行sql，接受返回结果，不需要传递sql语句
+    8. 处理结果
+    9. 释放资源
+</code></pre>
+<h1 id="jdbc管理事务">JDBC管理事务</h1>
+<ol>
+<li>事务：一个包含多个步骤的业务操作。如果这个业务操作被事务管理，则这多个步骤要么同时成功，要么同时失败。</li>
+<li>操作：
+<ol>
+<li>开启事务</li>
+<li>提交事务</li>
+<li>回滚事务</li>
+</ol>
+</li>
+<li>使用Connection对象来管理事务
+<ul>
+<li>开启事务：setAutoCommit(boolean autoCommit) ：调用该方法设置参数为false，即开启事务
+<ul>
+<li>在执行sql之前开启事务</li>
+</ul>
+</li>
+<li>提交事务：commit()
+<ul>
+<li>当所有sql都执行完提交事务</li>
+</ul>
+</li>
+<li>回滚事务：rollback()
+<ul>
+<li>在catch中回滚事务</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
 
                         </div>
                         
@@ -256,8 +413,13 @@ connection.close();
 <li><a href="#jdbc%E6%A0%B8%E5%BF%83api%E8%AF%A6%E8%A7%A3">JDBC核心API详解</a>
 <ul>
 <li><a href="#drivermanager%E7%B1%BB">DriverManager类</a></li>
+<li><a href="#connection%E7%B1%BB">Connection类</a></li>
+<li><a href="#statement%E7%B1%BB">Statement类</a></li>
+<li><a href="#resultset%E7%B1%BB">ResultSet类</a></li>
+<li><a href="#preparedstatement">PreparedStatement</a></li>
 </ul>
 </li>
+<li><a href="#jdbc%E7%AE%A1%E7%90%86%E4%BA%8B%E5%8A%A1">JDBC管理事务</a></li>
 </ul>
 
                             </div>
@@ -269,8 +431,8 @@ connection.close();
                                                     <i class="post-share"></i>
                                                     <span>Share:</span>
                                                         <a title="QR Code" target="_blank" href="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://PoorDogsHome.github.io/post/jdbc-bi-ji/"><i class="fa fa-qrcode"></i></a>
-                                                        <a title="QQ" target="_blank" href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=https://PoorDogsHome.github.io/post/jdbc-bi-ji/&sharesource=qzone&title=JDBC笔记&pics=https://PoorDogsHome.github.io/images/avatar.png?v=1597037845096&summary="><i class="fa fa-qq"></i></a>
-                                                        <a title="Weibo" target="_blank" href="https://service.weibo.com/share/share.php?url=https://PoorDogsHome.github.io/post/jdbc-bi-ji/&sharesource=weibo&title=JDBC笔记 + " - " + &pic="https://PoorDogsHome.github.io/images/avatar.png?v=1597037845096 "><i class="fa fa-weibo "></i></a>
+                                                        <a title="QQ" target="_blank" href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=https://PoorDogsHome.github.io/post/jdbc-bi-ji/&sharesource=qzone&title=JDBC笔记&pics=https://PoorDogsHome.github.io/images/avatar.png?v=1597048338238&summary="><i class="fa fa-qq"></i></a>
+                                                        <a title="Weibo" target="_blank" href="https://service.weibo.com/share/share.php?url=https://PoorDogsHome.github.io/post/jdbc-bi-ji/&sharesource=weibo&title=JDBC笔记 + " - " + &pic="https://PoorDogsHome.github.io/images/avatar.png?v=1597048338238 "><i class="fa fa-weibo "></i></a>
                                                         
                                                                 </span>
                                                                 <!--en-->
@@ -360,7 +522,7 @@ connection.close();
                     CheckVersion();
                     
                     var newDate = new Date();
-                    newDate.setTime(1597037845096);
+                    newDate.setTime(1597048338238);
                     console.log(" Blog Update Time: " + newDate.toLocaleDateString());
                     console.log("\n %c \u26a1Theme:Chic Author's Blog:https://blog.itjoker.cn  Write By ITJoker  \n\n", "color: #ffffff; background: rgba(49, 49, 49, 0.85); padding:5px 0;border-radius:5px;");
                 </script>
