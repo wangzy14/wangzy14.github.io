@@ -1,33 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
-    <id>https://PoorDogsHome.github.io</id>
+    <id>https://wangzy14.github.io</id>
     <title>BurgundyRed</title>
-    <updated>2020-08-10T09:00:53.977Z</updated>
+    <updated>2020-08-10T09:05:37.144Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
-    <link rel="alternate" href="https://PoorDogsHome.github.io"/>
-    <link rel="self" href="https://PoorDogsHome.github.io/atom.xml"/>
+    <link rel="alternate" href="https://wangzy14.github.io"/>
+    <link rel="self" href="https://wangzy14.github.io/atom.xml"/>
     <subtitle>Gubba nub nub doo rah kah</subtitle>
-    <logo>https://PoorDogsHome.github.io/images/avatar.png</logo>
-    <icon>https://PoorDogsHome.github.io/favicon.ico</icon>
+    <logo>https://wangzy14.github.io/images/avatar.png</logo>
+    <icon>https://wangzy14.github.io/favicon.ico</icon>
     <rights>All rights reserved 2020, BurgundyRed</rights>
     <entry>
         <title type="html"><![CDATA[JDBC笔记]]></title>
-        <id>https://PoorDogsHome.github.io/post/jdbc-bi-ji/</id>
-        <link href="https://PoorDogsHome.github.io/post/jdbc-bi-ji/">
+        <id>https://wangzy14.github.io/post/jdbc-bi-ji/</id>
+        <link href="https://wangzy14.github.io/post/jdbc-bi-ji/">
         </link>
         <updated>2020-08-10T04:37:01.000Z</updated>
     </entry>
     <entry>
         <title type="html"><![CDATA[安卓中的布局组件]]></title>
-        <id>https://PoorDogsHome.github.io/post/an-zhuo-zhong-de-bu-ju-zu-jian/</id>
-        <link href="https://PoorDogsHome.github.io/post/an-zhuo-zhong-de-bu-ju-zu-jian/">
+        <id>https://wangzy14.github.io/post/an-zhuo-zhong-de-bu-ju-zu-jian/</id>
+        <link href="https://wangzy14.github.io/post/an-zhuo-zhong-de-bu-ju-zu-jian/">
         </link>
         <updated>2020-07-15T12:46:02.000Z</updated>
     </entry>
     <entry>
         <title type="html"><![CDATA[常用AndroidStudio 快捷键]]></title>
-        <id>https://PoorDogsHome.github.io/post/androidstudio-kuai-jie-jian/</id>
-        <link href="https://PoorDogsHome.github.io/post/androidstudio-kuai-jie-jian/">
+        <id>https://wangzy14.github.io/post/androidstudio-kuai-jie-jian/</id>
+        <link href="https://wangzy14.github.io/post/androidstudio-kuai-jie-jian/">
         </link>
         <updated>2020-07-15T05:47:25.000Z</updated>
     </entry>
